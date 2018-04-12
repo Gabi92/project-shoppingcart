@@ -1,5 +1,6 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.AuthorizeTxInput;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.VerifyUserInput;
 
 public class PiqTxHandler {
@@ -22,6 +23,23 @@ public class PiqTxHandler {
 			
 			return response;
 			
+		}
+	}
+
+	public String authorizeTxHandler(AuthorizeTxInput indata) {
+
+
+		String response;
+		if (indata.getUserId().equals("1")) {
+
+			response = "SUCCESS";
+
+			return response;
+		} else {
+
+			response = "FAILED";
+
+			return response;
 		}
 	}
 }
