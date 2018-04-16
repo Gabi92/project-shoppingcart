@@ -1,7 +1,7 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 
-import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.AuthorizeTxInput;
-import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.VerifyUserInput;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.*;
+
 
 public class PiqTxHandler {
 
@@ -26,6 +26,8 @@ public class PiqTxHandler {
 		}
 	}
 
+	
+	
 	public String authorizeTxHandler(AuthorizeTxInput indata) {
 
 
@@ -41,5 +43,46 @@ public class PiqTxHandler {
 
 			return response;
 		}
+	}
+	
+	
+	public String transferTxHandler(TransferTxInput indata) {
+		
+		String response;
+
+		if (indata.getUserId().equals("1")) {
+
+			response = "SUCCESS";
+			
+
+			return response;
+
+		} else {
+
+			response = "Failed";
+			
+			return response;
+
+		}
+
+	}
+	
+	public String cancelTxHandler(CancelTxInput indata) {
+
+		String response;
+
+		if (indata.getUserId().equals("1")) {
+
+			response = "SUCCESS";
+			
+			return response;
+
+		} else {
+			
+			response = "FAILED";
+			
+			return response;
+		}
+
 	}
 }
