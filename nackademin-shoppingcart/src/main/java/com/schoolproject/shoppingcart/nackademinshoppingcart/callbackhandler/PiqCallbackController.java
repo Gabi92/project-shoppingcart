@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.AuthorizeTxInput;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.CancelTxInput;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.TransferTxInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,6 +63,51 @@ public class PiqCallbackController {
 			return;
 		}
 	}
+
+	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
+	@ResponseBody
+	public void transferTx(@RequestBody String indata, HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			TransferTxInput transferTxinput = new TransferTxInput(indata);
+			String transferTxResponse = piqTxHandler.transferTxHandler(transferTxinput);
+
+			response.setContentType("application/json");
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.getWriter().write(transferTxResponse);
+
+			return;
+
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return;
+		}
+
+	}
+
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
+	@ResponseBody
+	public void cancelTx(@RequestBody String indata, HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			response.setContentType("application/json");
+			CancelTxInput cancelTxInput = new CancelTxInput(indata);
+			String cancelTxResponse = piqTxHandler.cancelTxHandler(cancelTxInput);
+
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.getWriter().write(cancelTxResponse);
+
+			return;
+
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return;
+		}
+	}
+
 }
+
 
 
