@@ -1,8 +1,10 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 
+import org.springframework.stereotype.Component;
+
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.*;
 
-
+@Component
 public class PiqTxHandler {
 
 	
