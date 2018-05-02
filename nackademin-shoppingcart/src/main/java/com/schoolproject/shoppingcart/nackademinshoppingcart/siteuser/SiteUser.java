@@ -1,8 +1,19 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class SiteUser {
 
+	@Id
+	@Column(name = "userId")
+	@GeneratedValue
     private Long userId;
+	
+	
     private String firstName;
     private String lastName;
     private String street;
@@ -16,8 +27,9 @@ public class SiteUser {
     private Double balance;
     private String balanceCy;
 
-    public SiteUser(Long userId, String firstName, String lastName, String street, String city, String zip, String country, String email, String password, String dob, String mobile, Double balance, String balanceCy) {
-        this.userId = userId;
+    public SiteUser(String firstName, String lastName, String street, String city, String zip, String country,
+    		String email, String password, String dob, String mobile, Double balance, String balanceCy) {
+    	
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
