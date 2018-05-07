@@ -32,7 +32,7 @@ public class PiqCallbackValidator {
         }
     }
 
-    public boolean validateTranserTxRequest(SiteUser user, TransferTxInput indata) {
+    public boolean validateTransferTxRequest(SiteUser user, TransferTxInput indata) {
 
         if(!indata.getUserId().equals(user.getUserId().toString())) {
 
