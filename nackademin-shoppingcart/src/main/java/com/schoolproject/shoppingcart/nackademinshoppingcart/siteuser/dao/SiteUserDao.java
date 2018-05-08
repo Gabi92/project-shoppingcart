@@ -8,6 +8,8 @@ import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 
 @Repository
 public interface SiteUserDao extends CrudRepository<SiteUser, Long>{
+	
+	SiteUser findByUserId(Long userId);
 
 	
 }

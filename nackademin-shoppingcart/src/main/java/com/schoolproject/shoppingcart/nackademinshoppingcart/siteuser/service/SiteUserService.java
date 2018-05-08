@@ -15,5 +15,11 @@ public class SiteUserService {
 	public void saveSiteUser(SiteUser siteUser) {
 		siteUserDao.save(siteUser);
 	}
+	
+	public SiteUser findByUserId(Long userId) {
+		SiteUser user = siteUserDao.findByUserId(userId);
+		
+		return user;
+	}
 
 }
