@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+<head>
+</head>
+<body>
+<form class="forms" action="#" th:action="@{/login}" method="post">
+    <div class="loginform">
+        <div class="login-error" th:if="${param.error}">
+            <span>username or password is incorrect!</span>
+        </div>
+        <label for="email">Email</label>
+        <input class="logininput" name="email" placeholder="Email" type="text">
+        <label for="password">Password</label>
+        <input class="logininput" name="password" placeholder="Password" type="password">
+        <button class="loginbutton explore-button" type="submit">Sign In</button>
+    </div>
+</form>
+</body>
+</html>
