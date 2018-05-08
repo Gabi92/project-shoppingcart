@@ -1,19 +1,27 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.*;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.service.SiteUserService;
 
 @Component
 public class PiqTxHandler {
 
 	
+	@Autowired
+	SiteUserService siteUserService;
 	
 	public String verifyUserHandler(VerifyUserInput indata) {
 
+		
+		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
+		
 		String response;
 	
-		if (indata.getUserId().equals("1") && indata.getSessionId().equals("123")) {
+		if (indata.getUserId().equals(user.getUserId().toString()) && indata.getSessionId().equals("123")) {
 			
 			response = "SUCCESS";
 			
@@ -32,9 +40,12 @@ public class PiqTxHandler {
 	
 	public String authorizeTxHandler(AuthorizeTxInput indata) {
 
-
+		
+		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
+		
 		String response;
-		if (indata.getUserId().equals("1")) {
+		
+		if (indata.getUserId().equals(user.getUserId().toString())) {
 
 			response = "SUCCESS";
 
@@ -50,9 +61,11 @@ public class PiqTxHandler {
 	
 	public String transferTxHandler(TransferTxInput indata) {
 		
+		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
+		
 		String response;
 
-		if (indata.getUserId().equals("1")) {
+		if (indata.getUserId().equals(user.getUserId().toString())) {
 
 			response = "SUCCESS";
 			
@@ -70,10 +83,12 @@ public class PiqTxHandler {
 	}
 	
 	public String cancelTxHandler(CancelTxInput indata) {
+		
+		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 
 		String response;
 
-		if (indata.getUserId().equals("1")) {
+		if (indata.getUserId().equals(user.getUserId().toString())) {
 
 			response = "SUCCESS";
 			
