@@ -9,6 +9,8 @@ import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 @Repository
 public interface SiteUserDao extends CrudRepository<SiteUser, Long>{
 	
+	SiteUser findByEmail(String email);
+	
 	SiteUser findByUserId(Long userId);
 
 	
