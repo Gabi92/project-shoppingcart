@@ -4,10 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class SiteUser {
 
+	protected SiteUser() {
+	}
+	
 	@Id
 	@Column(name = "userId")
 	@GeneratedValue
@@ -21,6 +27,10 @@ public class SiteUser {
     private String zip;
     private String country;
     private String email;
+    
+	@Transient
+	private String plainPassword;
+	
     private String password;
     private String dob;
     private String mobile;
@@ -28,7 +38,7 @@ public class SiteUser {
     private String balanceCy;
 
     public SiteUser(String firstName, String lastName, String street, String city, String zip, String country,
-    		String email, String password, String dob, String mobile, Double balance, String balanceCy) {
+    		String email, String plainPassword, String dob, String mobile, Double balance, String balanceCy) {
     	
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,7 +47,8 @@ public class SiteUser {
         this.zip = zip;
         this.country = country;
         this.email = email;
-        this.password = password;
+        this.password = new BCryptPasswordEncoder().encode(plainPassword);
+        this.plainPassword = plainPassword;
         this.dob = dob;
         this.mobile = mobile;
         this.balance = balance;
@@ -115,6 +126,15 @@ public class SiteUser {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+	public String getPlainPassword() {
+		return plainPassword;
+	}
+	
+	public void setPlainPassword(String plainPassword) {
+		this.password = new BCryptPasswordEncoder().encode(plainPassword);
+		this.plainPassword = plainPassword;
+	}
 
     public String getDob() {
         return dob;

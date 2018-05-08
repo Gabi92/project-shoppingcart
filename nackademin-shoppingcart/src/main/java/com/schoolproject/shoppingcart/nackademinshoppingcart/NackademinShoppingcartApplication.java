@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class NackademinShoppingcartApplication {
@@ -49,5 +51,11 @@ public class NackademinShoppingcartApplication {
 					200.0,
 					"SEK"));
 		};
+	}
+	
+	@Bean
+	PasswordEncoder getEncoder() {
+		
+		return new BCryptPasswordEncoder();
 	}
 }
