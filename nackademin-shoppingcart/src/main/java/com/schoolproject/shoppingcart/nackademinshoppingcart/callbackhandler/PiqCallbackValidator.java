@@ -7,7 +7,10 @@ import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.cal
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 
 public class PiqCallbackValidator {
-
+	
+	
+	//This method validates the data that paymentIQ verifyUserRequest sent.
+	
     public PiqValidateObject validateVerifyUserRequest(SiteUser user, VerifyUserInput indata, PiqValidateObject pvo) {
 
         if (!indata.getUserId().equals(user.getUserId().toString())) {
@@ -28,6 +31,8 @@ public class PiqCallbackValidator {
 
     }
 
+  //This method validates the data that paymentIQ AuthorizeTxRequest sent.
+    
     public PiqValidateObject validateAutorizeTxRequest(SiteUser user, AuthorizeTxInput indata, PiqValidateObject pvo) {
 
         if (!indata.getUserId().equals(user.getUserId().toString())) {
@@ -57,6 +62,8 @@ public class PiqCallbackValidator {
         return pvo;
 
     }
+    
+  //This method validates the data that paymentIQ TransferTxRequest sent.
 
     public PiqValidateObject validateTransferTxRequest(SiteUser user, TransferTxInput indata, PiqValidateObject pvo) {
 
@@ -82,6 +89,8 @@ public class PiqCallbackValidator {
         }
 
     }
+    
+    //This method validates the data that paymentIQ CancelTxRequest sent.
 
     public PiqValidateObject validateCancelTxRequest(SiteUser user, CancelTxInput indata, PiqValidateObject pvo) {
 

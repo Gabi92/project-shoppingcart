@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private PasswordEncoder passwordEncoder;
 	
 	
+	//Spring security configuration that handles access config.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -62,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 	
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
@@ -73,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//@formatter:on*/
 	}
 
+	//Spring Security login configuration. so it authenticates a custom user.
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 

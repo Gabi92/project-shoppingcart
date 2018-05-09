@@ -3,6 +3,7 @@ package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.*;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.service.SiteUserService;
@@ -16,6 +17,10 @@ public class PiqTxHandler {
 
 	private PiqCallbackValidator callbackValid = new PiqCallbackValidator();
 	private PiqValidateObject pvo = new PiqValidateObject();
+	private PiqJsonResponseHandler piqJsonResponse = new PiqJsonResponseHandler();
+	
+	//Handles the verifyUserRequest sent by PaymentIQ by calling the validator and response creator and returning the response
+	//to the controller.
 	
 	public String verifyUserHandler(VerifyUserInput indata) {
 
@@ -26,13 +31,13 @@ public class PiqTxHandler {
 	
 		if (callbackValid.validateVerifyUserRequest(user, indata, pvo).isSuccess()) {
 			
-			response = "SUCCESS";
+			response = piqJsonResponse.verifyUserSuccess(user);
 			
 			return response;
 			
 		} else {
 			
-			response = "FAILED";
+			response = piqJsonResponse.verifyUserFailed(user, indata, pvo);
 			
 			return response;
 			
@@ -40,6 +45,8 @@ public class PiqTxHandler {
 	}
 
 	
+	//Handles the authorizeTxRequest sent by PaymentIQ by calling the validator and response creator and returning the response
+	//to the controller.
 	
 	public String authorizeTxHandler(AuthorizeTxInput indata) {
 
@@ -50,17 +57,19 @@ public class PiqTxHandler {
 		
 		if (callbackValid.validateAutorizeTxRequest(user, indata, pvo).isSuccess()) {
 
-			response = "SUCCESS";
-
+			response = piqJsonResponse.authorizeTxSuccess(user);
+			
 			return response;
 		} else {
 
-			response = "FAILED";
+			response = piqJsonResponse.authorizeTxFailed(user, pvo);
 
 			return response;
 		}
 	}
 	
+	//Handles the transferTxRequest sent by PaymentIQ by calling the validator and response creator and returning the response
+	//to the controller.
 	
 	public String transferTxHandler(TransferTxInput indata) {
 		
@@ -70,20 +79,23 @@ public class PiqTxHandler {
 
 		if (callbackValid.validateTransferTxRequest(user, indata, pvo).isSuccess()) {
 
-			response = "SUCCESS";
+			response = piqJsonResponse.transferTxSucess(user, indata);
 			
 
 			return response;
 
 		} else {
 
-			response = "Failed";
+			response = piqJsonResponse.transferTxFailed(user, indata, pvo);
 			
 			return response;
 
 		}
 
 	}
+	
+	//Handles the cancelTxRequest sent by PaymentIQ by calling the validator and response creator and returning the response
+	//to the controller.
 	
 	public String cancelTxHandler(CancelTxInput indata) {
 		
@@ -93,13 +105,13 @@ public class PiqTxHandler {
 
 		if (callbackValid.validateCancelTxRequest(user, indata, pvo).isSuccess()) {
 
-			response = "SUCCESS";
+			response = piqJsonResponse.cancelTxSuccess(user);
 			
 			return response;
 
 		} else {
 			
-			response = "FAILED";
+			response = piqJsonResponse.cancelTxFailed(user, pvo);
 			
 			return response;
 		}

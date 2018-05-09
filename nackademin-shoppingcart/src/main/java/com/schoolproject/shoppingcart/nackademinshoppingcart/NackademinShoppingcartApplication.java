@@ -20,6 +20,10 @@ public class NackademinShoppingcartApplication {
 		SpringApplication.run(NackademinShoppingcartApplication.class, args);
 	}
 
+	
+	
+	
+	// Creates and saves initial users to the database at startup.
 	@Bean
 	CommandLineRunner runner() {
 
@@ -49,10 +53,12 @@ public class NackademinShoppingcartApplication {
 					"1990-01-02",
 					"0760000002",
 					200.0,
-					"SEK"));
+					"EUR"));
 		};
 	}
 	
+	
+	// Password encoder for encryption of user password.
 	@Bean
 	PasswordEncoder getEncoder() {
 		

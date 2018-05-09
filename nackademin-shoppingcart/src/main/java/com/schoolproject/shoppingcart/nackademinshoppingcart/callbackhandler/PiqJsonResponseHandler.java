@@ -9,6 +9,9 @@ import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 import java.util.UUID;
 
 public class PiqJsonResponseHandler {
+	
+	
+	// This method creates a valid response to paymentIQ verifyuserRequest if validation returns true.
 
     public String verifyUserSuccess(SiteUser user) {
 
@@ -34,6 +37,8 @@ public class PiqJsonResponseHandler {
         return response;
     }
 
+    
+    // This method creates a valid response to paymentIQ verifyuserRequest if  validatation returns false.
 
     public String verifyUserFailed(SiteUser user, VerifyUserInput indata, PiqValidateObject pvo) {
 
@@ -52,6 +57,7 @@ public class PiqJsonResponseHandler {
     }
 
 
+    // This method creates a valid response to paymentIQ authorizeTxRequest if validation returns true.
     public String authorizeTxSuccess(SiteUser user) {
 
         String response;
@@ -70,6 +76,8 @@ public class PiqJsonResponseHandler {
 
     }
 
+    
+    // This method creates a valid response to paymentIQ authorizeTxRequest if validation returns false.
 
     public String authorizeTxFailed(SiteUser user,PiqValidateObject pvo) {
 
@@ -88,7 +96,8 @@ public class PiqJsonResponseHandler {
     }
 
 
-
+    // This method creates a valid response to paymentIQ transferTxRequest if validation returns true.
+    
     public String transferTxSucess(SiteUser user, TransferTxInput indata) {
 
         String response;
@@ -107,6 +116,8 @@ public class PiqJsonResponseHandler {
     }
 
 
+    // This method creates a valid response to paymentIQ transferTxRequest if validation returns false.
+    
     public String transferTxFailed(SiteUser user, TransferTxInput indata, PiqValidateObject pvo) {
         String response;
         JsonObject jsonobj = new JsonObject();
@@ -122,6 +133,8 @@ public class PiqJsonResponseHandler {
     }
 
 
+    // This method creates a valid response to paymentIQ cancelTxRequest if validation returns true.
+    
     public String cancelTxSuccess(SiteUser user) {
 
         String response;
@@ -135,6 +148,8 @@ public class PiqJsonResponseHandler {
         return response;
 
     }
+    
+    // This method creates a valid response to paymentIQ cancelTxRequest if validation returns false.
 
     public String cancelTxFailed(SiteUser user, PiqValidateObject pvo) {
 

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AuthController {
 	
+	
+	//Controller that handles authentication(login)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	String userLogin() {
 

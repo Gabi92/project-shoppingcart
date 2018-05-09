@@ -18,6 +18,10 @@ public class PiqCallbackController {
 	@Autowired
 	private PiqTxHandler piqTxHandler;
 	
+	
+	
+	//Controller Method that takes in VerifyUserRequest from paymentIQ
+	
 	@RequestMapping(value="/verifyuser", method = RequestMethod.POST)
 	public void verifyUserRequest(@RequestBody String indata, HttpServletRequest request, HttpServletResponse response) {
 		
@@ -38,6 +42,10 @@ public class PiqCallbackController {
 		}
 	}
 
+	
+	//Controller Method that takes in authorizeTxRequest from paymentIQ
+	//This method is called when verifyUser has returned Success
+	
 	@RequestMapping(value="/authorize", method = RequestMethod.POST)
 	@ResponseBody
 	public void authorizeTx(@RequestBody String indata, HttpServletRequest request, HttpServletResponse response) {
@@ -58,6 +66,9 @@ public class PiqCallbackController {
 			return;
 		}
 	}
+	
+	//Controller Method that takes in transferTxRequest from paymentIQ
+	//This method is called when authorizeTx has returned successfull
 
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
 	@ResponseBody
@@ -80,6 +91,9 @@ public class PiqCallbackController {
 		}
 
 	}
+	
+	//Controller Method that takes in cancelTxRequest from paymentIQ
+	//This method is called when authorizeTx of transferTx failed
 
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
 	@ResponseBody

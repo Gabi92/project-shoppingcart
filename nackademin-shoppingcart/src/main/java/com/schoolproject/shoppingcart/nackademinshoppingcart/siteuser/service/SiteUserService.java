@@ -20,16 +20,22 @@ public class SiteUserService implements UserDetailsService {
 	@Autowired
 	SiteUserDao siteUserDao;
 	
+	
+	// Saves a user to the database
 	public void saveSiteUser(SiteUser siteUser) {
 		siteUserDao.save(siteUser);
 	}
 	
+	
+	//loads user from database by Id.
 	public SiteUser findByUserId(Long userId) {
 		SiteUser user = siteUserDao.findByUserId(userId);
 		
 		return user;
 	}
 	
+	
+	//loads user by email for authentication when logging in.
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
