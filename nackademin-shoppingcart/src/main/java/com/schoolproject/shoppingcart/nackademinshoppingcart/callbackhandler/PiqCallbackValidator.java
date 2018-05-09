@@ -8,51 +8,93 @@ import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 
 public class PiqCallbackValidator {
 
-    public boolean validateVerifyUserRequest(SiteUser user, VerifyUserInput indata) {
+    public PiqValidateObject validateVerifyUserRequest(SiteUser user, VerifyUserInput indata, PiqValidateObject pvo) {
 
-        if(!indata.getUserId().equals(user.getUserId().toString())) {
+        if (!indata.getUserId().equals(user.getUserId().toString())) {
 
-            return false;
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_USERID_DOES_NOT_MATCH);
+
+            return pvo;
 
         } else {
 
-            return true;
+            pvo.setSuccess(true);
+            pvo.setResultMessage("");
+
+            return pvo;
+
         }
+
     }
 
-    public boolean validateAutorizeTxRequest(SiteUser user, AuthorizeTxInput indata) {
+    public PiqValidateObject validateAutorizeTxRequest(SiteUser user, AuthorizeTxInput indata, PiqValidateObject pvo) {
 
-        if(!indata.getUserId().equals(user.getUserId().toString())){
+        if (!indata.getUserId().equals(user.getUserId().toString())) {
 
-            return false;
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_USERID_DOES_NOT_MATCH);
 
-        } else {
+            return pvo;
 
-            return true;
-        }
+        } else if(!(indata.getTxAmount() <= user.getBalance())){
+
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_NOT_ENOUGH_CURRENCY);
+
+            return pvo;
+
+        } else if(!indata.getTxAmountCy().equals(user.getBalanceCy())) {
+
+
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_TXCY_DOES_NOT_MATCH_BALANCECY);
+
+        } else
+
+            pvo.setSuccess(true);
+
+        return pvo;
+
     }
 
-    public boolean validateTransferTxRequest(SiteUser user, TransferTxInput indata) {
+    public PiqValidateObject validateTransferTxRequest(SiteUser user, TransferTxInput indata, PiqValidateObject pvo) {
 
-        if(!indata.getUserId().equals(user.getUserId().toString())) {
+        if (!indata.getUserId().equals(user.getUserId().toString())) {
 
-            return false;
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_USERID_DOES_NOT_MATCH);
+
+            return pvo;
+
+        } else if(!indata.getTxAmountCy().equals(user.getBalanceCy())){
+
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_TXCY_DOES_NOT_MATCH_BALANCECY);
+
+            return pvo;
 
         } else {
 
-            return true;
+            pvo.setSuccess(true);
+
+            return pvo;
         }
+
     }
 
-    public boolean validateCancelTxRequest(SiteUser user, CancelTxInput indata) {
+    public PiqValidateObject validateCancelTxRequest(SiteUser user, CancelTxInput indata, PiqValidateObject pvo) {
 
-        if(!indata.getUserId().equals(user.getUserId().toString())) {
+        if (!indata.getUserId().equals(user.getUserId().toString())) {
 
-            return false;
+            pvo.setSuccess(false);
+            pvo.setResultMessage(pvo.ERROR_USERID_DOES_NOT_MATCH);
+            return pvo;
 
-        } else {
+        } else
 
-            return true;
-        }
+            pvo.setSuccess(true);
+        return pvo;
+
     }
 }

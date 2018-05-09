@@ -13,6 +13,9 @@ public class PiqTxHandler {
 	
 	@Autowired
 	SiteUserService siteUserService;
+
+	private PiqCallbackValidator callbackValid = new PiqCallbackValidator();
+	private PiqValidateObject pvo = new PiqValidateObject();
 	
 	public String verifyUserHandler(VerifyUserInput indata) {
 
@@ -21,7 +24,7 @@ public class PiqTxHandler {
 		
 		String response;
 	
-		if (indata.getUserId().equals(user.getUserId().toString()) && indata.getSessionId().equals("123")) {
+		if (callbackValid.validateVerifyUserRequest(user, indata, pvo).isSuccess()) {
 			
 			response = "SUCCESS";
 			
@@ -45,7 +48,7 @@ public class PiqTxHandler {
 		
 		String response;
 		
-		if (indata.getUserId().equals(user.getUserId().toString())) {
+		if (callbackValid.validateAutorizeTxRequest(user, indata, pvo).isSuccess()) {
 
 			response = "SUCCESS";
 
@@ -65,7 +68,7 @@ public class PiqTxHandler {
 		
 		String response;
 
-		if (indata.getUserId().equals(user.getUserId().toString())) {
+		if (callbackValid.validateTransferTxRequest(user, indata, pvo).isSuccess()) {
 
 			response = "SUCCESS";
 			
@@ -88,7 +91,7 @@ public class PiqTxHandler {
 
 		String response;
 
-		if (indata.getUserId().equals(user.getUserId().toString())) {
+		if (callbackValid.validateCancelTxRequest(user, indata, pvo).isSuccess()) {
 
 			response = "SUCCESS";
 			
