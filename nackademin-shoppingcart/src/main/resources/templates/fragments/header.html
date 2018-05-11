@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" 
+		xmlns="https://www.w3.org">
+	<head th:fragment="head-css">
+		
+			<title>Shopping Cart</title>
+			
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+			<!-- <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css" 
+					th:ref="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+					rel="stylesheet" Media="screen"/>  -->
+			<!-- <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">  -->
+			<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}">
+	</head>
+	<body>
+	
+		<div th:fragment="header">
+			<nav class="navbar navbar-inverse navbar-static-top">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand logo" th:href="@{/}">Payment<span>IQ</span></a>
+			    </div>
+			    <ul class="nav navbar-nav">
+			      <li><a th:href="@{/}">Home</a></li>
+			      <li><a th:href="@{/about}">About</a></li>
+			      <li><a th:href="@{/contact}">Contact</a></li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right" sec:authorize="!isAuthenticated()">
+			    	<li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			      	<li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			    </ul>
+				<div class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+	 				<div class="dropdown">
+	 					<div class="userinfo" th:with="userBalance=${@userService.getCurrentSiteUser().getBalance()}">
+		 					<span th:text="${@userService.getCurrentSiteUser().getFirstName()}"></span>
+					   		<a th:href="@{/managefunds}" th:text="${#numbers.formatDecimal(userBalance, 0, 'COMMA', 2, 'POINT')}"></a>
+					   		<button onclick="myFunction()" class="dropbtn"></button>
+	 					</div>
+					 	<div id="myDropdown" class="dropdown-content">
+						    <a th:href="@{javascript:$('#logoutForm').submit();}">Log out</a>
+						    <a th:href="@{/managefunds}">Manage funds</a>
+						</div>
+					</div> 
+				</div>
+			  </div>
+			</nav>
+			
+			<form id="logoutForm" th:action="@{/logout}" method="post">
+		            
+		  </form>
+		</div>
+		
+		<div th:fragment="footer">
+			<script th:src="@{https://code.jquery.com/jquery-3.2.1.min.js}"></script>
+			<script th:src="@{/js/index.js}"></script>
+		</div>
+	</body>
+	
+
+</html>
