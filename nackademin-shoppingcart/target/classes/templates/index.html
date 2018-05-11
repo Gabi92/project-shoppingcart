@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="https://www.w3.org"
-		xmlns:th="http//www.thymeleaf.org">
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
+<head th:replace="fragments/header :: head-css"></head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <body>
-	
-	Welcome!
-	
-	
+	<div th:replace="fragments/header :: header"></div>
+
+	<header sec:authorize="!isAuthenticated()">
+		<div class="header-container">
+			<a href="/templates/index.html" class="logo">Payment<span>IQ</span></a>
+			<h1 class="header-title">
+				Welcome to PaymentIQ shopping-cart demo!
+			</h1>
+			<p class="header-p-description">
+				This is a simple demo used for testing the integration with PaymentIQ.
+			</p>
+			<p class="header-p-instruction">
+				To test a payment you can register an account and log in or use the existing test account (email: TEST_USER@gmail.com password:
+				password)
+			</p>
+			<div class="btn-container">
+				<a class="explore-button" href="/templates/register" role="button">
+					Explore Payment<span>IQ</span>
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<div th:replace="fragments/header :: footer"></div>
 </body>
 
 </html>
