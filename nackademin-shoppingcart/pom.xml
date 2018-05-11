@@ -80,6 +80,13 @@
 		    <scope>runtime</scope>
 		</dependency>
 		
+		<!-- Other dependencies -->
+		
+		<dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+		
 	</dependencies>
 
 	<build>
