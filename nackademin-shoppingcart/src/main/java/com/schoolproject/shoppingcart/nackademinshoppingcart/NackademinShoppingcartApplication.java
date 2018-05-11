@@ -37,9 +37,7 @@ public class NackademinShoppingcartApplication {
 					"Test1@gmail.com",
 					"password",
 					"1990-01-01",
-					"0760000000",
-					200.0,
-					"SEK"));
+					"0760000000"));
 
 
 			siteUserService.saveSiteUser(new SiteUser("TestEUR",
@@ -51,9 +49,7 @@ public class NackademinShoppingcartApplication {
 					"Test2@gmail.com",
 					"password",
 					"1990-01-02",
-					"0760000002",
-					200.0,
-					"EUR"));
+					"0760000002"));
 		};
 	}
 	
