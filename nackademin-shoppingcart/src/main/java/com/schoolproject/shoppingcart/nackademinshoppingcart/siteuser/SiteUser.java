@@ -38,7 +38,7 @@ public class SiteUser {
     private String balanceCy;
 
     public SiteUser(String firstName, String lastName, String street, String city, String zip, String country,
-    		String email, String plainPassword, String dob, String mobile, Double balance, String balanceCy) {
+    		String email, String plainPassword, String dob, String mobile) {
     	
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,8 +51,8 @@ public class SiteUser {
         this.plainPassword = plainPassword;
         this.dob = dob;
         this.mobile = mobile;
-        this.balance = balance;
-        this.balanceCy = balanceCy;
+        this.balance = 500.00;
+        this.balanceCy = "SEK";
     }
 
     public Long getUserId() {
