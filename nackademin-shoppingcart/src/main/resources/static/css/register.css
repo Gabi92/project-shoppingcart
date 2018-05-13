@@ -1,0 +1,26 @@
+select {
+	padding: 0.5em;
+	border-radius: 0.4em;
+	font-size: 1rem;
+	border: 2px solid rgb(87, 25, 87);
+	background-color: white;
+	color: #333333;
+	
+}
+
+select:focus {
+	outline: none;
+	box-shadow: 0 0px 15px rgb(87, 25, 87);
+}
+
+.street-info {
+	width: 80%;
+	height: 2.5em;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.street-info input{
+	width: 35%;
+	margin: 0;
+}
