@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head-css"></head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="loginform">
+		<a class="btn" data-popup-open="popup-1" href="#">Deposit</a>
+		<div class="popup" data-popup="popup-1">
+			<div class="popup-inner">
+				<iframe width="560" height="315" th:src="${piqdepositurl}"></iframe>
+				<a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+			</div>
+		</div>
+
+		<a class="btn" data-popup-open="popup-2" href="#">Withdrawal</a>
+		<div class="popup" data-popup="popup-2">
+			<div class="popup-inner">
+				<iframe width="560" height="315" th:src="${piqwithdrawurl}"></iframe>
+				<a class="popup-close" data-popup-close="popup-2" href="#">x</a>
+			</div>
+		</div>
+		<a class="btn" th:href="@{/txhistory}">History</a>
+	</div>
+	<div th:replace="fragments/header :: footer"></div>
+</body>
+
+</html>
