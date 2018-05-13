@@ -76,9 +76,13 @@ public class PiqTxHandler {
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 		
 		String response;
+		Double balanceAfterTx;
 
 		if (callbackValid.validateTransferTxRequest(user, indata, pvo).isSuccess()) {
 
+			
+			balanceAfterTx = user.getBalance() + indata.getTxAmount();
+			user.setBalance(balanceAfterTx);
 			response = piqJsonResponse.transferTxSucess(user, indata);
 			
 

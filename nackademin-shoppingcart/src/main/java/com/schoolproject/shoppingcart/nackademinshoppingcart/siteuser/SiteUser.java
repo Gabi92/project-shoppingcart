@@ -51,8 +51,33 @@ public class SiteUser {
         this.plainPassword = plainPassword;
         this.dob = dob;
         this.mobile = mobile;
-        this.balance = 500.00;
-        this.balanceCy = "SEK";
+		this.balanceCy = "";
+		this.balance = 0.00;
+        
+        switch (country) {
+
+		case "Sweden":
+			this.balanceCy = "SEK";
+			this.balance = 500.00;
+			break;
+
+		case "Spain":
+			this.balanceCy = "EUR";
+			this.balance = 50.87;
+			break;
+
+		case "United States":
+			this.balanceCy = "USD";
+			this.balance = 63.39;
+			break;
+			
+		default:
+			this.balanceCy = "EUR";
+			this.balance = 50.87;
+			break;
+
+		}
+        
     }
 
     public Long getUserId() {

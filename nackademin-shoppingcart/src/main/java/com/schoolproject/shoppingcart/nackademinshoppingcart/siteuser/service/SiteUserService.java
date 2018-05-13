@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,6 +33,16 @@ public class SiteUserService implements UserDetailsService {
 		SiteUser user = siteUserDao.findByUserId(userId);
 		
 		return user;
+	}
+	
+	public SiteUser getCurrentSiteUser() {
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
+		String name = user.getUsername();
+		
+		SiteUser siteUser = siteUserDao.findByEmail(name);
+		
+		return siteUser;
 	}
 	
 	
