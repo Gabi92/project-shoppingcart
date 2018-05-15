@@ -163,6 +163,7 @@ public class PiqTxHandler {
 			response = piqJsonResponse.cancelTxSuccess(user);
 
 			piqTx.setCancelTxResponse(response);
+			piqTxService.saveTx(piqTx);
 			
 			return response;
 
@@ -173,6 +174,7 @@ public class PiqTxHandler {
 			piqTx.setTxSuccess("FAILED");
 			piqTx.setTxMsg(pvo.getResultMessage());
 			piqTx.setCancelTxResponse(response);
+			piqTxService.saveTx(piqTx);
 			
 			return response;
 		}
