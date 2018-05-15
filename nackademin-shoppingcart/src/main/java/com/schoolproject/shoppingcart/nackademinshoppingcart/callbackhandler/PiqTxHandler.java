@@ -1,5 +1,7 @@
 package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.piqtx.PiqTx;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.piqtx.service.PiqTxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,9 @@ public class PiqTxHandler {
 	
 	@Autowired
 	SiteUserService siteUserService;
+
+	@Autowired
+	PiqTxService piqTxService;
 
 	private TxCmdHandler cmdHandler = new TxCmdHandler();
 	private PiqCallbackValidator callbackValid = new PiqCallbackValidator();
@@ -54,6 +59,18 @@ public class PiqTxHandler {
 
 		VerifyUserInput latestVUInput = cmdHandler.getLatestVerifyUserCmd();
 		String latestVUResponse = cmdHandler.getLatestVerifyUserRespCmd();
+
+		PiqTx piqTx = new PiqTx();
+		piqTx.setUserId(verifyUserData.getUserId());
+		piqTx.setSessionId(verifyUserData.getSessionId());
+		piqTx.setTxAmount(indata.getTxAmount());
+		piqTx.setTxAmountCy(indata.getTxAmountCy());
+		piqTx.setPiqTxId(indata.getTxId());
+		piqTx.setTxTypeId(indata.getTxTypeId());
+		piqTx.setTxName(indata.getTxName());
+		piqTx.setProvider(indata.getProvider());
+		piqTx.setVerifyUserResponse(verifyUserRespData);
+		piqTxService.saveTx(piqTx);
 		
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 		
@@ -61,12 +78,21 @@ public class PiqTxHandler {
 		
 		if (callbackValid.validateAutorizeTxRequest(user, indata, pvo).isSuccess()) {
 
-			response = piqJsonResponse.authorizeTxSuccess(user);
+			response = piqJsonResponse.authorizeTxSuccess(user, piqTx);
+
+			piqTx.setAuthorizeTxResponse(response);
+			piqTx.setTxSuccess("SUCCESS");
+			piqTxService.saveTx(piqTx);
 			
 			return response;
 		} else {
 
 			response = piqJsonResponse.authorizeTxFailed(user, pvo);
+
+			piqTx.setAuthorizeTxResponse(response);
+			piqTx.setTxSuccess("FAILED");
+			piqTx.setTxMsg(pvo.getResultMessage());
+			piqTxService.saveTx(piqTx);
 
 			return response;
 		}
@@ -76,6 +102,16 @@ public class PiqTxHandler {
 	//to the controller.
 	
 	public String transferTxHandler(TransferTxInput indata) {
+
+		PiqTx piqTx = piqTxService.findByPiqTxId(indata.getTxId());
+
+		piqTx.setAuthCode(indata.getAuthCode());
+		piqTx.setTxPspAmount(indata.getTxPspAmount());
+		piqTx.setTxPspAmountCy(indata.getTxPspAmountCy());
+		piqTx.setFee(indata.getFee());
+		piqTx.setFeeCy(indata.getFeeCy());
+		piqTx.setTxRefId(indata.getTxRefId());
+		piqTxService.saveTx(piqTx);
 		
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 		
@@ -87,7 +123,11 @@ public class PiqTxHandler {
 			
 			balanceAfterTx = user.getBalance() + indata.getTxAmount();
 			user.setBalance(balanceAfterTx);
-			response = piqJsonResponse.transferTxSucess(user, indata);
+			response = piqJsonResponse.transferTxSucess(user, indata, piqTx);
+
+			piqTx.setTransferTxResponse(response);
+			piqTx.setTxSuccess("SUCCESS");
+			piqTxService.saveTx(piqTx);
 			
 
 			return response;
@@ -95,6 +135,11 @@ public class PiqTxHandler {
 		} else {
 
 			response = piqJsonResponse.transferTxFailed(user, indata, pvo);
+
+			piqTx.setTransferTxResponse(response);
+			piqTx.setTxSuccess("FAILED");
+			piqTx.setTxMsg(pvo.getResultMessage());
+			piqTxService.saveTx(piqTx);
 			
 			return response;
 
@@ -106,7 +151,9 @@ public class PiqTxHandler {
 	//to the controller.
 	
 	public String cancelTxHandler(CancelTxInput indata) {
-		
+
+		PiqTx piqTx = piqTxService.findByPiqTxId(indata.getTxId());
+
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 
 		String response;
@@ -114,12 +161,18 @@ public class PiqTxHandler {
 		if (callbackValid.validateCancelTxRequest(user, indata, pvo).isSuccess()) {
 
 			response = piqJsonResponse.cancelTxSuccess(user);
+
+			piqTx.setCancelTxResponse(response);
 			
 			return response;
 
 		} else {
 			
 			response = piqJsonResponse.cancelTxFailed(user, pvo);
+
+			piqTx.setTxSuccess("FAILED");
+			piqTx.setTxMsg(pvo.getResultMessage());
+			piqTx.setCancelTxResponse(response);
 			
 			return response;
 		}

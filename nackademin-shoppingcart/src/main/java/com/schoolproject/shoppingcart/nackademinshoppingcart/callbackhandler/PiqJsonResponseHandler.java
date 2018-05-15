@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.TransferTxInput;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.VerifyUserInput;
+import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.piqtx.PiqTx;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 
 import java.util.UUID;
@@ -58,7 +59,7 @@ public class PiqJsonResponseHandler {
 
 
     // This method creates a valid response to paymentIQ authorizeTxRequest if validation returns true.
-    public String authorizeTxSuccess(SiteUser user) {
+    public String authorizeTxSuccess(SiteUser user, PiqTx piqTx) {
 
         String response;
         JsonObject jsonobj = new JsonObject();
@@ -66,7 +67,7 @@ public class PiqJsonResponseHandler {
 
         jsonobj.addProperty("userId", user.getUserId());
         jsonobj.addProperty("success", true);
-        jsonobj.addProperty("merchantTxId","1");
+        jsonobj.addProperty("merchantTxId", piqTx.getTxId());
         jsonobj.addProperty("authCode", authCode.toString());
 
         response = new Gson().toJson(jsonobj);
@@ -98,7 +99,7 @@ public class PiqJsonResponseHandler {
 
     // This method creates a valid response to paymentIQ transferTxRequest if validation returns true.
     
-    public String transferTxSucess(SiteUser user, TransferTxInput indata) {
+    public String transferTxSucess(SiteUser user, TransferTxInput indata, PiqTx piqTx) {
 
         String response;
 
@@ -107,7 +108,7 @@ public class PiqJsonResponseHandler {
         jsonobj.addProperty("userId", user.getUserId());
         jsonobj.addProperty("success", true);
         jsonobj.addProperty("txId", indata.getTxId());
-        jsonobj.addProperty("merchantTxId", "1");
+        jsonobj.addProperty("merchantTxId", piqTx.getTxId());
 
         response = new Gson().toJson(jsonobj);
 
