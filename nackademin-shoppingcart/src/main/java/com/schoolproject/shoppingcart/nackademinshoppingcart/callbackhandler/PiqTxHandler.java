@@ -61,15 +61,15 @@ public class PiqTxHandler {
 		String latestVUResponse = cmdHandler.getLatestVerifyUserRespCmd();
 
 		PiqTx piqTx = new PiqTx();
-		piqTx.setUserId(verifyUserData.getUserId());
-		piqTx.setSessionId(verifyUserData.getSessionId());
+		piqTx.setUserId(latestVUInput.getUserId());
+		piqTx.setSessionId(latestVUInput.getSessionId());
 		piqTx.setTxAmount(indata.getTxAmount());
 		piqTx.setTxAmountCy(indata.getTxAmountCy());
 		piqTx.setPiqTxId(indata.getTxId());
 		piqTx.setTxTypeId(indata.getTxTypeId());
 		piqTx.setTxName(indata.getTxName());
 		piqTx.setProvider(indata.getProvider());
-		piqTx.setVerifyUserResponse(verifyUserRespData);
+		piqTx.setVerifyUserResponse(latestVUResponse);
 		piqTxService.saveTx(piqTx);
 		
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
