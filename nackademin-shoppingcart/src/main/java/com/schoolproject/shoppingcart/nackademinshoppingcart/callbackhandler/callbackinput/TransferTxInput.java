@@ -6,19 +6,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TransferTxInput {
 
-	String userId;
-	String authCode;
-	Double txAmount;
-	String txAmountCy;
-	String txPspAmount;
-	String txPspAmountCy;
-	String fee;
-	String feeCy;
-	String txId;
-	Number txTypeId;
-	String txName;
-	String provider;
-	String txRefId;
+	private String userId;
+	private String authCode;
+	private Double txAmount;
+	private String txAmountCy;
+	private String txPspAmount;
+	private String txPspAmountCy;
+	private String fee;
+	private String feeCy;
+	private String txId;
+	private Number txTypeId;
+	private String txName;
+	private String provider;
+	private String txRefId;
 	
 	
 	

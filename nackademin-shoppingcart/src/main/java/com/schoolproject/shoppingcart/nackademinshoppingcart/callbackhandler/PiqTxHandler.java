@@ -3,7 +3,6 @@ package com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import com.schoolproject.shoppingcart.nackademinshoppingcart.callbackhandler.callbackinput.*;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.SiteUser;
 import com.schoolproject.shoppingcart.nackademinshoppingcart.siteuser.service.SiteUserService;
@@ -15,6 +14,7 @@ public class PiqTxHandler {
 	@Autowired
 	SiteUserService siteUserService;
 
+	private TxCmdHandler cmdHandler = new TxCmdHandler();
 	private PiqCallbackValidator callbackValid = new PiqCallbackValidator();
 	private PiqValidateObject pvo = new PiqValidateObject();
 	private PiqJsonResponseHandler piqJsonResponse = new PiqJsonResponseHandler();
@@ -24,6 +24,7 @@ public class PiqTxHandler {
 	
 	public String verifyUserHandler(VerifyUserInput indata) {
 
+		cmdHandler.addVerifyUserCmd(indata);
 		
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 		
@@ -32,6 +33,7 @@ public class PiqTxHandler {
 		if (callbackValid.validateVerifyUserRequest(user, indata, pvo).isSuccess()) {
 			
 			response = piqJsonResponse.verifyUserSuccess(user);
+			cmdHandler.addVerifyUserRespCmd(response);
 			
 			return response;
 			
@@ -50,6 +52,8 @@ public class PiqTxHandler {
 	
 	public String authorizeTxHandler(AuthorizeTxInput indata) {
 
+		VerifyUserInput latestVUInput = cmdHandler.getLatestVerifyUserCmd();
+		String latestVUResponse = cmdHandler.getLatestVerifyUserRespCmd();
 		
 		SiteUser user= siteUserService.findByUserId(Long.parseLong(indata.getUserId()));
 		

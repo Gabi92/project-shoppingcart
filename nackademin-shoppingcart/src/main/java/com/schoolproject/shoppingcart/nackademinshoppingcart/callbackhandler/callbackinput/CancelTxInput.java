@@ -7,14 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CancelTxInput {
 
 	
-	String userId;
-	String authCode;
-	String txAmount;
-	String txAmountCy;
-	String txId;
-	String txTypeId;
-	String txName;
-	String provider;
+	private String userId;
+	private String authCode;
+	private String txAmount;
+	private String txAmountCy;
+	private String txId;
+	private String txTypeId;
+	private String txName;
+	private String provider;
 	
 	
 	//Constructor
