@@ -13,10 +13,24 @@ public class ViewController {
 	@Autowired
 	SiteUserService siteUserService;
 
-	//controller for a simple homepage.
+	//controller for homepage.
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String homePage() {
 		
 		return "index";
+	}
+	
+	//controller for aboutpage.
+	@RequestMapping(value="/about", method = RequestMethod.GET)
+	public String aboutPage() {
+		
+		return "about";
+	}
+	
+	//controller for contactpage.
+	@RequestMapping(value="/contact", method = RequestMethod.GET)
+	public String contactPage() {
+		
+		return "contact";
 	}
 }
