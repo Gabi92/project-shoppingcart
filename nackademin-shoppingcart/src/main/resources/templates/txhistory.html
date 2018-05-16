@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head-css"></head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+
+    <table class="forms table-width">
+        <thead>
+            <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">AmountCy</th>
+                <th scope="col">State</th>
+                <th scope="col">Type</th>
+                <th scope="col">Provider</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="piqTx : ${txHistory}">
+                <td th:text="${#numbers.formatDecimal(piqTx.txAmount, 0, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${piqTx.txAmountCy}"></td>
+                <td th:text="${piqTx.txSuccess}"></td>
+                <td th:text="${piqTx.txTypeId}"></td>
+                <td th:text="${piqTx.provider}"></td>
+                <td th:text="${piqTx.txName}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+	<div th:replace="fragments/header :: footer"></div>
+</body>
+
+
+</html>
