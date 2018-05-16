@@ -30,7 +30,7 @@ input:focus {
 }
 
 .login-error {
-	color: white;
+	color: rgb(221, 82, 82);
 }
 
 .loginbutton {
