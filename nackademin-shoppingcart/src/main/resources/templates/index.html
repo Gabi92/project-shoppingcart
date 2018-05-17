@@ -28,6 +28,17 @@
 		</div>
 	</header>
 
+	<header sec:authorize="isAuthenticated()">
+		<div class="header-container">
+			<a href="/templates/index.html" class="logo">Payment<span>IQ</span></a>
+			<h1 class="header-title">
+				Welcome to PaymentIQ shopping-cart demo!
+			</h1>
+
+			<h3 class="white-font normal-24">To try a deposit or withdrawal click on the balance amount on the top right. You can also see transaction history for payments there.</h3>
+		</div>
+	</header>
+
 	<div th:replace="fragments/header :: footer"></div>
 </body>
 

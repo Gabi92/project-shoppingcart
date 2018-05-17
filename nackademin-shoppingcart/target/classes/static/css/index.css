@@ -57,3 +57,8 @@ span {
 	display: flex;
 	flex-direction: column;
 }
+
+.normal-24 {
+	font-weight: normal;
+	font-size: 24px;
+}
