@@ -5,37 +5,71 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class SiteUser {
-
-	protected SiteUser() {
-	}
 	
 	@Id
 	@Column(name = "userId")
 	@GeneratedValue
     private Long userId;
 	
-	
+	@Column(name="firstName")
+	@NotBlank(message="{register.firstname.invalid}")
     private String firstName;
+	
+	@Column(name="lastName")
+	@NotBlank(message="{register.lastname.invalid}")
     private String lastName;
+	
+	@Column(name="street")
     private String street;
+	
+	@Column(name="city")
     private String city;
+	
+	@Column(name="zip")
     private String zip;
+	
+	@Column(name="country")
+	@NotBlank(message="{register.country.invalid}")
     private String country;
+	
+	@Column(name = "email", unique=true)
+	@Email(message="{register.email.invalid}")
+	@NotBlank(message="{register.email.invalid}")
     private String email;
     
 	@Transient
+	@Size(min=5, max=15, message="{register.password.size}")
 	private String plainPassword;
 	
+	@Column(name="password", length=60)
     private String password;
+	
+	@Column(name="dob")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotBlank(message="{register.dob.invalid}")
     private String dob;
+	
+	@Column(name="mobile")
     private String mobile;
+	
+	@Column(name="balance")
     private Double balance;
+	
+	@Column(name="balanceCy")
+	@NotBlank
     private String balanceCy;
+	
+	protected SiteUser() {
+	}
 
     public SiteUser(String firstName, String lastName, String street, String city, String zip, String country,
     		String email, String plainPassword, String dob, String mobile) {
