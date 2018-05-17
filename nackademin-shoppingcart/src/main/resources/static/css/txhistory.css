@@ -15,3 +15,8 @@ td {
 tr:nth-child(even) {
     background-color: rgba(179, 71, 179, 0.2);
 }
+
+.white-font {
+    color: #fff;
+    padding-top: 40px;
+}

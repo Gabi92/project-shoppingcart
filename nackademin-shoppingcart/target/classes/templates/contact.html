@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http//www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head-css"></head>
+<head th:replace="fragments/header :: head-css">
+	<link rel="stylesheet" href="../static/css/style.css">
+</head>
 
 <body>
 	<div th:replace="fragments/header :: header"></div>
-
+		<div class="white-box padding-30">
+			<div class="top-h1"><h1>Contact us</h1></div>
+			<div class="inner-grid padding-20">
+			<div class="contact1">
+				<div class="image2 width-height-300"></div>
+				<div class="name">Gabriel Acosta Engler</div>
+				<div class="tel">Tel: 0767105222</div>
+				<div class="mail">Email: <a class="black-link" href="mailto:gabi.​acosta.​engler@gmail.​com">gabi.​acosta.​engler@gmail.​com</a></div>
+			</div>
+</div>
+			<div class="inner-grid padding-20">
+			<div class="contact2">
+				<div class="image width-height-300"></div>
+				<div class="name">Vladislav Jungerstam</div>
+				<div class="tel">Tel: 0703865514</div>
+				<div class="mail">Email: <a class="black-link" href="mailto:v.jungerstam@gmail.com">v.jungerstam@gmail.com</a></div>
+			</div>
+				</div>
+			</div>
+		</div>
 
 
 	<div th:replace="fragments/header :: footer"></div>

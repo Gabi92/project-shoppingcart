@@ -1,0 +1,26 @@
+.about-image {
+    background-image: url("../img/igaming.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.width-height-500 {
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.grid {
+    width: 80%;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.font-20 {
+    font-size: 20px;
+}
